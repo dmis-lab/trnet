@@ -21,7 +21,7 @@ Among 1.3 million samples, we use 187,498 samples of pairs, which include 20,336
 The preprocessed dataset can be downloaded at [`here`](#)
 
 ### Dataset Preparation
-![sampling image](sampling.eps)
+![sampling image](sampling.png)
 We evaluated whether TRNet can predict the virtual screening result of a new cell line or a new compound, and complement HTS. 
 For this purpose, the validation and test sets include tuples containing new drugs or new cell lines that have not been included in the training set.
 * `train.pkl` and `validation.pkl` are used for training and evaluating the drug-induced gene expressions prediction models.
