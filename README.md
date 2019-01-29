@@ -1,4 +1,5 @@
 # TRNet
+![model image](model_architecture.PNG)
 This repository provides implementation code of TRNet, which is transcriptional response prediction neural network.
 
 ## Installation
@@ -17,12 +18,21 @@ We filtered the profiles of non-compound perturbagens such as shRNA, and the pro
 As the drug dosage and the duration of drug administration significantly affect the post-treatment gene expression, we use the (Cell Line, Drug, Dosage, Duration) tuple as a sample. 
 If there are replicates of a tuple, we randomly choose one tuple among them. 
 Among 1.3 million samples, we use 187,498 samples of pairs, which include 20,336 drugs and 70 cell lines for TRNet.
+The preprocessed dataset can be downloaded at [`here`](#)
 
-### Toy Smaples
-To run our implementation code, we release the toy samples `\toy\train_1.tsv`, `\toy\train_2.tsv`, `\toy\test_1.tsv`, `\toy\test_2.tsv` , and `\toy\patient_data.tsv`
-* `train_1.tsv` and `test_1.tsv` are used for the prediction of the degree of antdepressant response (Task 1). 
-* `train_2.tsv` and `test_2.tsv` are used for the prediction of the clinical remession of patients (Task 2).
-* `patient_data.tsv` consists of demographic, neuroimaging biomarkers, genetic variants, and DNA methylation features.
+### Dataset Preparation
+![sampling image](sampling.eps)
+We evaluated whether TRNet can predict the virtual screening result of a new cell line or a new compound, and complement HTS. 
+For this purpose, the validation and test sets include tuples containing new drugs or new cell lines that have not been included in the training set.
+* `train.pkl` and `validation.pkl` are used for training and evaluating the drug-induced gene expressions prediction models.
+* `OO.pkl`: The (Old drug, Old cell line) test set indicates the task of filling in the missing observations in the training set. 
+The drugs and cell lines in the (Old drug, Old cell line) test set are included in the training set, but they never appear together in the same tuple in the training set. and `test_1.tsv` are used for the prediction of the degree of antdepressant response (Task 1).
+* `NO.pkl`: The (New drug, Old cell line) test set indicates the task of identifying drug-induced gene expressions of drug candidates. 
+The cell lines in this test set are included in the training set, whereas the drugs in this test set are not included in the training set.
+* `ON.pkl`: The (Old drug, New cell line) test set indicates the task of identifying the effects of drugs on new cell lines. 
+The drugs in this test set are included in the training set, whereas the cell lines in this test set never appear in the training set.
+* `NN.pkl`: The (New drug, New cell line) test set indicates the task of predicting the drug-induced gene expression of new drug candidates on new cell lines. 
+The drugs and cell lines in this test set are not included in the training set.
 
 ## Run
 Download and unpack the NER datasets provided above (**[`Named Entity Recognition`](http://gofile.me/6pN25/avQHrfPRf)**). From now on, `$NER_DIR` indicates a folder for a single dataset which should include `train_dev.tsv`, `train.tsv`, `devel.tsv` and `test.tsv`. For example, `export NER_DIR=~/bioBERT/biodatasets/NERdata/NCBI-disease`. Following command runs fine-tuining code on NER with default arguments.
@@ -38,5 +48,5 @@ If we submit the paper to a conference or journal, we will update the BibTeX.
 
 ## Contact information
 
-For help or issues using ARPNet, please submit a GitHub issue. Please contact Buru Chang
-(`buru_chag (at) korea.ac.kr`), or Yonghwa Choi (`yonghwachoi (at) korea.ac.kr`) for communication related to BioBERT.
+For help or issues using ARPNet, please submit a GitHub issue. Please contact Minji Jeon
+(`mjjeon (at) korea.ac.kr`), or Buru Chang (`buru_chang (at) korea.ac.kr`) for communication related to TRNet.
