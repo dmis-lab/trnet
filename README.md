@@ -5,9 +5,9 @@ This repository provides implementation code of TRNet, which is transcriptional 
 ## Installation
 The experiments were conducted on a single TITAN Xp GPU machine which has 12GB of RAM.
 The implemntation code of TRNet was tested with the following requirements:
- and TensorFlow1.6.0.
 *   **[`Python2.7.12`](https://www.python.org/downloads/release/python-2712/)**
 *   **[`PyTorch0.4.1`](https://pytorch.org/get-started/previous-versions/)**
+*   **[`SciPy1.2.0`](https://scipy.github.io/devdocs/release.1.2.0.html)**
 
 ## Datasets
 ### Description
@@ -18,7 +18,7 @@ We filtered the profiles of non-compound perturbagens such as shRNA, and the pro
 As the drug dosage and the duration of drug administration significantly affect the post-treatment gene expression, we use the (Cell Line, Drug, Dosage, Duration) tuple as a sample. 
 If there are replicates of a tuple, we randomly choose one tuple among them. 
 Among 1.3 million samples, we use 187,498 samples of pairs, which include 20,336 drugs and 70 cell lines for TRNet.
-The preprocessed dataset can be downloaded at [`here`](#)
+The preprocessed dataset can be downloaded at [`here`](#).
 
 ### Dataset Preparation
 ![sampling image](sampling.png)
@@ -33,14 +33,20 @@ The cell lines in this test set are included in the training set, whereas the dr
 The drugs in this test set are included in the training set, whereas the cell lines in this test set never appear in the training set.
 * `NN.pkl`: The (New drug, New cell line) test set indicates the task of predicting the drug-induced gene expression of new drug candidates on new cell lines. 
 The drugs and cell lines in this test set are not included in the training set.
+* `pre_treatment.pkl`: This file includes the pre-treatment profiles of cell lines.
+* `drugs_fingerprint.pkl`: This file includes the extended connectivity fingerprint of drugs from [`RDKit`](http://www.rdkit.org/). 
+
 
 ## Run
-Download and unpack the NER datasets provided above (**[`Named Entity Recognition`](http://gofile.me/6pN25/avQHrfPRf)**). From now on, `$NER_DIR` indicates a folder for a single dataset which should include `train_dev.tsv`, `train.tsv`, `devel.tsv` and `test.tsv`. For example, `export NER_DIR=~/bioBERT/biodatasets/NERdata/NCBI-disease`. Following command runs fine-tuining code on NER with default arguments.
+Following command runs training TRNet with default hyper-paramters.
 ```
-python run.py \
-    --task=1
+python train.py \
+		--dataset_dir=./TRNet_Dataset/
 ```
-You can change the task as you want. Once you perfrom task 2, you can use it in task mode by using `--task=2`
+Following command runs evaluating Pre-trained TRNet using four test sets.
+```
+python test.py 
+```
 
 ## Citation
 
