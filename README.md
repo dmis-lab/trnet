@@ -18,7 +18,7 @@ We filtered the profiles of non-compound perturbagens such as shRNA, and the pro
 As the drug dosage and the duration of drug administration significantly affect the post-treatment gene expression, we use the (Cell Line, Drug, Dosage, Duration) tuple as a sample. 
 If there are replicates of a tuple, we randomly choose one tuple among them. 
 Among 1.3 million samples, we use 187,498 samples of pairs, which include 20,336 drugs and 70 cell lines for TRNet.
-The preprocessed dataset can be downloaded at [`here`](#).
+The preprocessed dataset can be downloaded at [`here`](http://dmis.korea.ac.kr/downloads?id=TRNet).
 
 ### Dataset Preparation
 ![sampling image](sampling.png)
