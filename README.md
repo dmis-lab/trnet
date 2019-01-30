@@ -54,5 +54,5 @@ If we submit the paper to a conference or journal, we will update the BibTeX.
 
 ## Contact information
 
-For help or issues using ARPNet, please submit a GitHub issue. Please contact Minji Jeon
+For help or issues using TRNet, please submit a GitHub issue. Please contact Minji Jeon
 (`mjjeon (at) korea.ac.kr`), or Buru Chang (`buru_chang (at) korea.ac.kr`) for communication related to TRNet.
